@@ -1,2 +1,2 @@
-# Centos-Common-Command
-Tổng hợp toàn bộ các command cần thiết khi thao tác với Centos 7
+# VPS Guide
+Tổng hợp toàn bộ các guide trong quá trình thao tác với VPS
