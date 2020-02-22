@@ -1,7 +1,7 @@
 # Active Root User trên VPS Google
 Cách dễ dàng để kích hoạt root user trên VPS của Google và một số VPS khác không mặc định cho sử dụng root user. Theo các bước dưới đây
 
-Bước 1
+Tạo tài khoản dùng thử
 ------------
  Nếu chưa có thì cần tạo một VPS của Google trên trang https://console.cloud.google.com/
  . Sử dụng thẻ VISA để có thể đăng ký chương trình dùng thử 300$/1 năm của Google.
@@ -41,29 +41,23 @@ passwd: all authentication tokens updated successfully
 ```
 có nghĩa là đã đổi thành công.
 
-Usage
---------
-Impliment 2 methods: showLoading() and dismissLoading() to use easily.
-
+Edit quyền truy cập SSH
+------------
+Thay đổi config để cho phép đăng nhập VPS bằng root user + password từ các SSH client bên thứ 3.
+- Mở file cài đặt config bằng lệnh
 ```groovy
-private SimpleLoadingDialog progressDialog;
+vi /etc/ssh/sshd_config
+```
+- Tìm đến dòng PermitRootLogin no và gõ sửa lại thành yes
+- Tìm đến dòng Authenication no và gõ sửa lại thành yes
+- Sửa xong, nhấn phím ESC để thoát chức năng chỉnh sửa.
+- Nhấn :x để lưu nội dung đã chỉnh sửa và thoát ra.
 
-private void showLoading() {
-    if (progressDialog == null) {
-       progressDialog = SimpleLoadingDialog.newInstance()
-            .setMessage("Loading data. \nPlease wait for a few seconds or check your internet quality ...", "#327773")
-            .setLoadingColor("#327773")
-            .setCanceled(true, true);
-       }
-
-    if (progressDialog.isAdded()) {
-       return;
-    }
-    progressDialog.show(this);
-}
-
-private void dismissLoading() {
-    if (progressDialog != null) progressDialog.dismiss();
-}
+Khởi động lại
+------------
+Sau khi sửa config cần khởi động lại service để cập nhật cấu hình mới. Sử dụng lệnh:
+```groovy
+service sshd restart
 ```
 
+Như vậy là đã cấu hình xong và có thể sử dụng SSH Client như Bitvise hay Putty để truy cập vào VPS, sử dụng root user + mật khẩu.
