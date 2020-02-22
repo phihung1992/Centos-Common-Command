@@ -49,7 +49,7 @@ Thay đổi config để cho phép đăng nhập VPS bằng root user + password
 vi /etc/ssh/sshd_config
 ```
 - Tìm đến dòng PermitRootLogin no và gõ sửa lại thành yes
-- Tìm đến dòng Authenication no và gõ sửa lại thành yes
+- Tìm đến dòng PasswordAuthenication no và gõ sửa lại thành yes
 - Sửa xong, nhấn phím ESC để thoát chức năng chỉnh sửa.
 - Nhấn :x để lưu nội dung đã chỉnh sửa và thoát ra.
 
